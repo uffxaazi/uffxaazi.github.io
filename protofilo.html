@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohamed Aazil | Portfolio</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    body { 
+      font-family: 'Inter', system-ui, sans-serif;
+      overflow-x: hidden;
+      /* HIDDEN SCROLLBAR */
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    
+    /* HIDDEN SCROLLBAR Chrome, Safari and Opera */
+    body::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Background Grid */
+    .bg-grid {
+      background-size: 40px 40px;
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+    }
+    .dark .bg-grid {
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+    html:not(.dark) .bg-grid {
+      background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    }
+
+    /* Glass Cards */
+    .glass-card { 
+      backdrop-filter: blur(12px); 
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+    .dark .glass-card { 
+      background: rgba(255, 255, 255, 0.03); 
+      border: 1px solid rgba(255, 255, 255, 0.05); 
+      box-shadow: none;
+    }
+    html:not(.dark) .glass-card { 
+      background: rgba(255, 255, 255, 0.7); 
+      border: 1px solid rgba(0, 0, 0, 0.1); 
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Nav Blur */
+    .nav-blur { transition: all 0.3s ease; }
+    .dark .nav-blur { 
+      background: rgba(10, 10, 10, 0.8); 
+      backdrop-filter: blur(12px); 
+      border-bottom: 1px solid rgba(255,255,255,0.05); 
+    }
+    html:not(.dark) .nav-blur { 
+      background: rgba(255, 255, 255, 0.8); 
+      backdrop-filter: blur(12px); 
+      border-bottom: 1px solid rgba(0,0,0,0.05); 
+    }
+
+    /* Neon Text Effect */
+    .dark .neon-text { color: #10b981; text-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+    html:not(.dark) .neon-text { color: #2563eb; text-shadow: 0 0 10px rgba(37, 99, 235, 0.3); }
+
+    /* Animations */
+    #preloader { transition: opacity 0.8s ease-out, visibility 0.8s ease-out; }
+    .fade-out-loader { opacity: 0; visibility: hidden; pointer-events: none; }
+    @keyframes loadingBar { 0% { width: 0%; } 100% { width: 100%; } }
+    .animate-loading-bar { animation: loadingBar 2s ease-in-out forwards; }
+    .spin-reverse { animation: spin 1.5s linear infinite reverse; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+  </style>
+</head>
+<body class="antialiased bg-slate-50 text-slate-900 dark:bg-[#0a0a0a] dark:text-[#f5f5f5] selection:bg-blue-500 dark:selection:bg-emerald-500 selection:text-white pb-12 transition-colors duration-300">
+
+  <div class="bg-grid"></div>
+
+  <div id="preloader" class="fixed inset-0 z-[100] bg-slate-50 dark:bg-[#0a0a0a] flex flex-col justify-center items-center transition-colors duration-300">
+    <div class="relative flex justify-center items-center mb-8">
+      <div class="absolute w-32 h-32 border-4 border-transparent border-t-blue-600 border-b-blue-600 dark:border-t-emerald-500 dark:border-b-emerald-500 rounded-full animate-spin shadow-[0_0_15px_rgba(37,99,235,0.4)] dark:shadow-[0_0_15px_rgba(16,185,129,0.5)]"></div>
+      <div class="absolute w-24 h-24 border-4 border-transparent border-l-blue-400 border-r-blue-400 dark:border-l-emerald-400 dark:border-r-emerald-400 rounded-full spin-reverse opacity-70"></div>
+      <span class="text-2xl font-bold tracking-tighter neon-text animate-pulse">&lt;Aazil /&gt;</span>
+    </div>
+    <div class="text-blue-600 dark:text-emerald-500/80 font-mono text-sm tracking-widest animate-pulse mb-3">INITIALIZING WORKSPACE...</div>
+    <div class="w-48 h-[2px] bg-slate-300 dark:bg-gray-800 rounded-full overflow-hidden shadow-[0_0_10px_rgba(37,99,235,0.2)] dark:shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+      <div class="h-full bg-blue-600 dark:bg-emerald-500 animate-loading-bar"></div>
+    </div>
+  </div>
+
+  <nav class="fixed w-full z-50 nav-blur">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#hero" class="text-xl font-bold tracking-tighter neon-text hover:scale-105 transition">&lt;Aazil /&gt;</a>
+      
+      <div class="flex items-center">
+        <ul class="hidden md:flex space-x-8 text-sm font-medium text-slate-600 dark:text-gray-300">
+          <li><a href="#about" class="hover:text-blue-600 dark:hover:text-emerald-400 transition">About</a></li>
+          <li><a href="#skills" class="hover:text-blue-600 dark:hover:text-emerald-400 transition">Skills</a></li>
+          <li><a href="#projects" class="hover:text-blue-600 dark:hover:text-emerald-400 transition">Projects</a></li>
+          <li><a href="#education" class="hover:text-blue-600 dark:hover:text-emerald-400 transition">Education</a></li>
+          <li><a href="#contact" class="hover:text-blue-600 dark:hover:text-emerald-400 transition">Hire Me</a></li>
+        </ul>
+        
+        <button id="theme-toggle" class="ml-8 text-slate-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-emerald-400 transition text-xl focus:outline-none">
+          <i id="theme-toggle-dark-icon" class="hidden fas fa-moon"></i>
+          <i id="theme-toggle-light-icon" class="hidden fas fa-sun"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero" class="pt-40 pb-20 px-6 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center min-h-screen">
+    <div class="order-2 md:order-1 reveal">
+      <div class="inline-flex items-center space-x-2 bg-blue-500/10 dark:bg-emerald-500/10 text-blue-600 dark:text-emerald-400 px-3 py-1 rounded-full text-sm font-medium mb-6 border border-blue-500/20 dark:border-emerald-500/20 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 transition cursor-default">
+        <span class="w-2 h-2 rounded-full bg-blue-600 dark:bg-emerald-500 animate-pulse shadow-[0_0_8px_#2563eb] dark:shadow-[0_0_8px_#10b981]"></span>
+        <span>Available for Opportunities</span>
+      </div>
+      <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 leading-tight text-slate-900 dark:text-white">
+        Mohamed <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700 dark:from-emerald-400 dark:to-emerald-600">Aazil</span>
+      </h1>
+      <p class="text-xl text-slate-600 dark:text-gray-400 mb-6 max-w-lg leading-relaxed">
+        Software Engineering Student & Web Developer crafting scalable systems, database architectures, and modern digital experiences. Based in Galle, Sri Lanka.
+      </p>
+      
+      <div class="flex space-x-4 mb-8">
+        <a href="#projects" class="bg-blue-600 dark:bg-emerald-500 hover:bg-blue-700 dark:hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium transition shadow-[0_0_15px_rgba(37,99,235,0.4)] dark:shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_25px_rgba(37,99,235,0.6)] dark:hover:shadow-[0_0_25px_rgba(16,185,129,0.6)] hover:-translate-y-1">View Case Studies</a>
+        <a href="#contact" class="glass-card hover:bg-slate-200/50 dark:hover:bg-white/10 px-6 py-3 rounded-lg font-medium transition hover:-translate-y-1 text-slate-900 dark:text-white">Contact Me</a>
+      </div>
+
+      <div class="flex flex-wrap gap-4">
+        <a href="#" target="_blank" class="w-11 h-11 rounded-full flex items-center justify-center glass-card text-[#E1306C] hover:text-white hover:bg-gradient-to-tr hover:from-[#F56040] hover:via-[#E1306C] hover:to-[#833AB4] hover:border-transparent hover:shadow-[0_0_20px_#E1306C] hover:-translate-y-1 transition-all duration-300 text-xl"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank" class="w-11 h-11 rounded-full flex items-center justify-center glass-card text-[#1877F2] hover:text-white hover:bg-[#1877F2] hover:border-transparent hover:shadow-[0_0_20px_#1877F2] hover:-translate-y-1 transition-all duration-300 text-xl"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank" class="w-11 h-11 rounded-full flex items-center justify-center glass-card text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:border-transparent hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.8)] hover:-translate-y-1 transition-all duration-300 text-xl"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" target="_blank" class="w-11 h-11 rounded-full flex items-center justify-center glass-card text-black dark:text-[#fafafa] hover:bg-[#333] hover:text-white hover:border-transparent hover:shadow-[0_0_20px_rgba(0,0,0,0.5)] dark:hover:shadow-[0_0_20px_#ffffff] hover:-translate-y-1 transition-all duration-300 text-xl"><i class="fab fa-github"></i></a>
+        <a href="#" target="_blank" class="w-11 h-11 rounded-full flex items-center justify-center glass-card text-[#0077B5] hover:text-white hover:bg-[#0077B5] hover:border-transparent hover:shadow-[0_0_20px_#0077B5] hover:-translate-y-1 transition-all duration-300 text-xl"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:hello@example.com" class="w-11 h-11 rounded-full flex items-center justify-center glass-card text-[#EA4335] hover:text-white hover:bg-[#EA4335] hover:border-transparent hover:shadow-[0_0_20px_#EA4335] hover:-translate-y-1 transition-all duration-300 text-xl"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    
+    <div class="order-1 md:order-2 flex justify-center items-center relative reveal delay-200">
+      <div class="absolute inset-0 bg-blue-500/20 dark:bg-emerald-500/20 blur-[80px] rounded-full w-64 h-64 md:w-80 md:h-80 mx-auto animate-pulse duration-1000"></div>
+      <div class="relative z-10 glass-card p-2 rounded-full border border-blue-500/30 dark:border-emerald-500/30 shadow-2xl shadow-blue-500/20 dark:shadow-emerald-500/20 transition duration-500 hover:scale-105 hover:border-blue-500 dark:hover:border-emerald-400 group">
+        <div class="absolute inset-0 rounded-full border-2 border-blue-500/50 dark:border-emerald-500/50 scale-105 opacity-0 group-hover:opacity-100 group-hover:animate-ping transition duration-500"></div>
+        <img src="aazi.jpg" alt="Mohamed Aazil" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-full bg-slate-200 dark:bg-gray-800 z-10 relative" onerror="this.src='https://via.placeholder.com/400x400/1f2937/10b981?text=Aazil'">
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-20 bg-slate-200/30 dark:bg-white/[0.02] border-y border-slate-200 dark:border-white/5 relative overflow-hidden">
+    <div class="absolute -left-40 top-0 w-96 h-96 bg-blue-500/5 dark:bg-emerald-500/5 rounded-full blur-[100px]"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-blue-600 dark:text-emerald-500 font-mono text-sm mb-2 reveal">01 — About Me</div>
+      <h2 class="text-3xl md:text-5xl font-bold mb-12 reveal text-slate-900 dark:text-white">Crafting Digital <span class="text-blue-600 dark:text-emerald-500">Experiences</span></h2>
+      <div class="grid md:grid-cols-2 gap-12">
+        <div class="text-slate-600 dark:text-gray-400 space-y-6 text-lg leading-relaxed reveal delay-100">
+          <p>Achievement-driven Software Engineering student specializing in backend architecture, database schema implementation, and modern UI/UX design to deliver <strong class="text-slate-900 dark:text-white">high-performance and scalable applications</strong>.</p>
+          <p>Currently pursuing my Higher National Diploma, I have practical experience orchestrating system modernization—from building secure authentication flows to designing interactive digital lessons. I excel at bridging the gap between complex structural logic and engaging user interfaces.</p>
+        </div>
+        <div class="glass-card p-8 rounded-2xl reveal delay-200 hover:border-blue-500/30 dark:hover:border-emerald-500/30 transition duration-300">
+          <h3 class="text-xl font-bold mb-6 text-slate-900 dark:text-white">Quick Info</h3>
+          <ul class="space-y-4 text-slate-700 dark:text-gray-300">
+            <li class="flex items-center group"><span class="mr-4 text-xl group-hover:scale-125 transition">📍</span><span>Galle, Sri Lanka</span></li>
+            <li class="flex items-center group"><span class="mr-4 text-xl group-hover:scale-125 transition">🎓</span><span>ESOFT Metro Campus</span></li>
+            <li class="flex items-center group"><span class="mr-4 text-xl group-hover:scale-125 transition">🌐</span><a href="#" class="hover:text-blue-600 dark:hover:text-emerald-400 transition border-b border-transparent hover:border-blue-600 dark:hover:border-emerald-400">aboutaazi.news</a></li>
+            <li class="flex items-center group"><span class="mr-4 text-xl group-hover:scale-125 transition">🚀</span><span>Open to new opportunities</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-20 px-6 max-w-7xl mx-auto">
+    <div class="text-blue-600 dark:text-emerald-500 font-mono text-sm mb-2 reveal">02 — Skills</div>
+    <h2 class="text-3xl md:text-5xl font-bold mb-12 reveal text-slate-900 dark:text-white">My <span class="text-blue-600 dark:text-emerald-500">Tech Stack</span></h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass-card p-6 rounded-xl hover:-translate-y-3 hover:shadow-[0_10px_30px_rgba(37,99,235,0.1)] dark:hover:shadow-[0_10px_30px_rgba(16,185,129,0.1)] hover:border-blue-500/30 dark:hover:border-emerald-500/30 transition duration-300 reveal delay-100">
+        <div class="text-4xl mb-4 bg-slate-200 dark:bg-white/5 w-16 h-16 flex items-center justify-center rounded-lg text-blue-600 dark:text-emerald-400">⚡</div>
+        <h3 class="text-lg font-bold mb-4 text-slate-900 dark:text-white">Languages & Logic</h3>
+        <div class="flex flex-wrap gap-2 text-slate-700 dark:text-gray-300">
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">Java</span>
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">Python</span>
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">C#</span>
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">SQL</span>
+        </div>
+      </div>
+      <div class="glass-card p-6 rounded-xl hover:-translate-y-3 hover:shadow-[0_10px_30px_rgba(37,99,235,0.1)] dark:hover:shadow-[0_10px_30px_rgba(16,185,129,0.1)] hover:border-blue-500/30 dark:hover:border-emerald-500/30 transition duration-300 reveal delay-200">
+        <div class="text-4xl mb-4 bg-slate-200 dark:bg-white/5 w-16 h-16 flex items-center justify-center rounded-lg text-blue-600 dark:text-emerald-400">🧩</div>
+        <h3 class="text-lg font-bold mb-4 text-slate-900 dark:text-white">Web & Design</h3>
+        <div class="flex flex-wrap gap-2 text-slate-700 dark:text-gray-300">
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">HTML5/CSS3</span>
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">Web Design</span>
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">Figma</span>
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">Canva</span>
+        </div>
+      </div>
+      <div class="glass-card p-6 rounded-xl hover:-translate-y-3 hover:shadow-[0_10px_30px_rgba(37,99,235,0.1)] dark:hover:shadow-[0_10px_30px_rgba(16,185,129,0.1)] hover:border-blue-500/30 dark:hover:border-emerald-500/30 transition duration-300 reveal delay-300">
+        <div class="text-4xl mb-4 bg-slate-200 dark:bg-white/5 w-16 h-16 flex items-center justify-center rounded-lg text-blue-600 dark:text-emerald-400">🔗</div>
+        <h3 class="text-lg font-bold mb-4 text-slate-900 dark:text-white">Architecture & Networking</h3>
+        <div class="flex flex-wrap gap-2 text-slate-700 dark:text-gray-300">
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">OSI Model</span>
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">VLSM</span>
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">Network Topologies</span>
+          <span class="bg-slate-200 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-emerald-500/20 hover:text-blue-700 dark:hover:text-emerald-300 transition px-3 py-1 rounded-md text-sm">NoSQL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-20 bg-slate-200/30 dark:bg-white/[0.02] border-y border-slate-200 dark:border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-blue-600 dark:text-emerald-500 font-mono text-sm mb-2 reveal">03 — Projects</div>
+      <h2 class="text-3xl md:text-5xl font-bold mb-12 reveal text-slate-900 dark:text-white">Selected <span class="text-blue-600 dark:text-emerald-500">Case Studies</span></h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <article class="glass-card p-6 rounded-2xl flex flex-col h-full hover:border-blue-500/50 dark:hover:border-emerald-500/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition duration-300 group reveal delay-100">
+          <div class="flex justify-between items-start mb-4">
+            <div class="text-blue-600 dark:text-emerald-500 font-mono text-sm">01 / Backend & Database</div>
+            <span class="text-slate-500 group-hover:text-blue-600 dark:group-hover:text-emerald-400 transition transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-emerald-300 transition">Library Modernization System</h3>
+          <p class="text-slate-600 dark:text-gray-400 text-sm mb-6 flex-grow leading-relaxed">A complete structural overhaul of legacy library systems. Designed robust database schemas and implemented secure user authentication flows.</p>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="text-xs bg-blue-500/10 dark:bg-emerald-500/10 border border-blue-500/20 dark:border-emerald-500/20 text-blue-600 dark:text-emerald-400 px-2 py-1 rounded">SQL</span>
+            <span class="text-xs bg-blue-500/10 dark:bg-emerald-500/10 border border-blue-500/20 dark:border-emerald-500/20 text-blue-600 dark:text-emerald-400 px-2 py-1 rounded">Auth Logic</span>
+          </div>
+        </article>
+
+        <article class="glass-card p-6 rounded-2xl flex flex-col h-full hover:border-blue-500/50 dark:hover:border-emerald-500/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition duration-300 group reveal delay-200">
+          <div class="flex justify-between items-start mb-4">
+            <div class="text-blue-600 dark:text-emerald-500 font-mono text-sm">02 / EdTech & Multimedia</div>
+            <span class="text-slate-500 group-hover:text-blue-600 dark:group-hover:text-emerald-400 transition transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-emerald-300 transition">Preschool Digital Learning Platform</h3>
+          <p class="text-slate-600 dark:text-gray-400 text-sm mb-6 flex-grow leading-relaxed">Designed and structured a comprehensive series of 12 online interactive lessons for early childhood education, leveraging advanced UI elements.</p>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="text-xs bg-blue-500/10 dark:bg-emerald-500/10 border border-blue-500/20 dark:border-emerald-500/20 text-blue-600 dark:text-emerald-400 px-2 py-1 rounded">Canva</span>
+            <span class="text-xs bg-blue-500/10 dark:bg-emerald-500/10 border border-blue-500/20 dark:border-emerald-500/20 text-blue-600 dark:text-emerald-400 px-2 py-1 rounded">UI/UX</span>
+          </div>
+        </article>
+
+        <article class="glass-card p-6 rounded-2xl flex flex-col h-full hover:border-blue-500/50 dark:hover:border-emerald-500/50 hover:shadow-[0_0_20px_rgba(37,99,235,0.15)] dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] transition duration-300 group reveal delay-300">
+          <div class="flex justify-between items-start mb-4">
+            <div class="text-blue-600 dark:text-emerald-500 font-mono text-sm">03 / Enterprise Analysis</div>
+            <span class="text-slate-500 group-hover:text-blue-600 dark:group-hover:text-emerald-400 transition transform group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+          </div>
+          <h3 class="text-xl font-bold mb-3 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-emerald-300 transition">Keells Sri Lanka Architecture Review</h3>
+          <p class="text-slate-600 dark:text-gray-400 text-sm mb-6 flex-grow leading-relaxed">Conducted an in-depth corporate analysis mapping out business processes, technology integration, and operational structures.</p>
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <span class="text-xs bg-blue-500/10 dark:bg-emerald-500/10 border border-blue-500/20 dark:border-emerald-500/20 text-blue-600 dark:text-emerald-400 px-2 py-1 rounded">System Analysis</span>
+            <span class="text-xs bg-blue-500/10 dark:bg-emerald-500/10 border border-blue-500/20 dark:border-emerald-500/20 text-blue-600 dark:text-emerald-400 px-2 py-1 rounded">Documentation</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="py-20 px-6 max-w-7xl mx-auto">
+    <div class="text-blue-600 dark:text-emerald-500 font-mono text-sm mb-2 reveal">04 — Education</div>
+    <h2 class="text-3xl md:text-5xl font-bold mb-12 reveal text-slate-900 dark:text-white">Academic <span class="text-blue-600 dark:text-emerald-500">Background</span></h2>
+    <div class="glass-card p-8 rounded-2xl flex flex-col md:flex-row gap-8 items-start relative overflow-hidden reveal hover:border-blue-500/30 dark:hover:border-emerald-500/30 transition duration-300 group">
+      <div class="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-blue-500/5 dark:from-emerald-500/5 to-transparent"></div>
+      
+      <div class="text-5xl bg-slate-200 dark:bg-white/5 p-4 rounded-xl group-hover:-translate-y-2 group-hover:text-blue-600 dark:group-hover:text-emerald-400 transition duration-300">🎓</div>
+      <div class="relative z-10">
+        <h3 class="text-2xl font-bold mb-1 text-slate-900 dark:text-white">Higher National Diploma in Software Engineering</h3>
+        <p class="text-blue-600 dark:text-emerald-400 font-medium mb-2">ESOFT Metro Campus · Galle</p>
+        <div class="inline-block bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 rounded-md px-3 py-1 mb-4">
+          <p class="text-slate-600 dark:text-gray-400 text-sm">Batch No: <strong class="text-slate-900 dark:text-white">PE B04</strong> | Oct 2025 — Present</p>
+        </div>
+        <ul class="list-disc list-inside text-slate-700 dark:text-gray-300 space-y-2 leading-relaxed">
+          <li>Specializing in core programming concepts, relational databases, and modern software design.</li>
+          <li>Actively developing a strong foundation in networking protocols and logical topologies.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-24 bg-slate-200/30 dark:bg-white/[0.02] border-t border-slate-200 dark:border-white/5 text-center relative overflow-hidden">
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-blue-500/10 dark:bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-3xl mx-auto px-6 relative z-10 reveal">
+      <div class="text-blue-600 dark:text-emerald-500 font-mono text-sm mb-2">05 — Contact</div>
+      <h2 class="text-4xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">Let's <span class="text-blue-600 dark:text-emerald-500">Work Together</span></h2>
+      <p class="text-slate-600 dark:text-gray-400 mb-8 text-lg max-w-xl mx-auto">Have a project in mind, or want to discuss opportunities? My inbox is always open.</p>
+      <a href="mailto:hello@example.com" class="inline-block bg-blue-600 dark:bg-emerald-500 hover:bg-blue-700 dark:hover:bg-emerald-600 text-white px-10 py-4 rounded-xl font-bold text-lg transition duration-300 shadow-[0_0_20px_rgba(37,99,235,0.3)] dark:shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] dark:hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] hover:-translate-y-2 mb-12">
+        Get in Touch
+      </a>
+
+      <div class="flex flex-wrap justify-center gap-6">
+        <a href="#" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center glass-card text-[#E1306C] hover:text-white hover:bg-gradient-to-tr hover:from-[#F56040] hover:via-[#E1306C] hover:to-[#833AB4] hover:border-transparent hover:shadow-[0_0_25px_#E1306C] hover:-translate-y-2 transition-all duration-300 text-2xl"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center glass-card text-[#1877F2] hover:text-white hover:bg-[#1877F2] hover:border-transparent hover:shadow-[0_0_25px_#1877F2] hover:-translate-y-2 transition-all duration-300 text-2xl"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center glass-card text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:border-transparent hover:shadow-[0_0_25px_rgba(0,0,0,0.5)] dark:hover:shadow-[0_0_25px_rgba(255,255,255,0.8)] hover:-translate-y-2 transition-all duration-300 text-2xl"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center glass-card text-black dark:text-[#fafafa] hover:bg-[#333] hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(0,0,0,0.5)] dark:hover:shadow-[0_0_25px_#ffffff] hover:-translate-y-2 transition-all duration-300 text-2xl"><i class="fab fa-github"></i></a>
+        <a href="#" target="_blank" class="w-12 h-12 rounded-full flex items-center justify-center glass-card text-[#0077B5] hover:text-white hover:bg-[#0077B5] hover:border-transparent hover:shadow-[0_0_25px_#0077B5] hover:-translate-y-2 transition-all duration-300 text-2xl"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:hello@example.com" class="w-12 h-12 rounded-full flex items-center justify-center glass-card text-[#EA4335] hover:text-white hover:bg-[#EA4335] hover:border-transparent hover:shadow-[0_0_25px_#EA4335] hover:-translate-y-2 transition-all duration-300 text-2xl"><i class="fas fa-envelope"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="py-8 text-center border-t border-slate-200 dark:border-white/5 mt-auto relative z-10">
+    <p class="text-slate-500 dark:text-gray-500 text-sm">Designed & built for <span class="text-blue-600 dark:text-emerald-500 font-medium">Mohamed Aazil</span> · 2026</p>
+  </footer>
+
+  <script>
+    // --- Preloader Logic ---
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('fade-out-loader');
+        setTimeout(() => { 
+          document.getElementById('preloader').style.display = 'none'; 
+          reveal(); 
+        }, 800);
+      }, 1500); // Shortened slightly for better UX
+    });
+
+    // --- Scroll Reveal Logic ---
+    function reveal() {
+      var reveals = document.querySelectorAll('.reveal');
+      for (var i = 0; i < reveals.length; i++) {
+        if (reveals[i].getBoundingClientRect().top < window.innerHeight - 100) {
+          reveals[i].classList.add('active');
+        }
+      }
+    }
+    window.addEventListener('scroll', reveal);
+
+    // --- Dark/Light Mode Toggle Logic ---
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    // Check existing theme preference
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        themeToggleLightIcon.classList.remove('hidden');
+        document.documentElement.classList.add('dark');
+    } else {
+        themeToggleDarkIcon.classList.remove('hidden');
+        document.documentElement.classList.remove('dark');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+        // Toggle icon
+        themeToggleDarkIcon.classList.toggle('hidden');
+        themeToggleLightIcon.classList.toggle('hidden');
+
+        // Update Theme & Local Storage
+        if (localStorage.getItem('color-theme')) {
+            if (localStorage.getItem('color-theme') === 'light') {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            }
+        } else {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+    });
+  </script>
+
+</body>
+</html>
